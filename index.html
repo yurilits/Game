@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Guess My Number!</title>
+  </head>
+  <body>
+    <header>
+      <h1>Fight Club</h1>
+      <div class="number">👊</div>
+    </header>
+
+    <main>
+      <p class="message">Fight your opponent👊👊👊</p>
+      <section class="left">
+        <table>
+          <tr>
+            <td width="500">
+              <form>
+                <label>
+                  <input type="radio" name="hit" value="head" />
+                  Hit in the head </label
+                ><br /><br />
+                <label>
+                  <input type="radio" name="hit" value="body" />
+                  Hit in the body </label
+                ><br /><br />
+                <label>
+                  <input type="radio" name="hit" value="feet" />
+                  Hit in the feet
+                </label>
+              </form>
+            </td>
+            <td width="500">
+              <form>
+                <label>
+                  <input type="radio" name="block" value="head" />
+                  Block the head </label
+                ><br /><br />
+                <label>
+                  <input type="radio" name="block" value="body" />
+                  Block the body </label
+                ><br /><br />
+                <label>
+                  <input type="radio" name="block" value="feet" />
+                  Block the feet
+                </label>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="center-text">
+              <br />
+              <button
+                id="Check-button"
+                type="button"
+                class="btn"
+                onclick="recordSelection()"
+              >
+                Check!
+              </button>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class="right">
+        <p class="your-health">
+          Your health: <span class="your-health1">3</span>❤️
+        </p>
+        <p class="opponent-health">
+          Opponent health: <span class="opponent-health1">3</span>💛
+        </p>
+        <br />
+        <br />
+        <br />
+        <p class="label-score">
+          💯 Wins in a raw: <span class="score">0</span>
+        </p>
+        <p class="label-highscore">
+          🥇 Highscore: <span class="highscore">0</span>
+        </p>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
