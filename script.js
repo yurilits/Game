@@ -18,6 +18,7 @@ let highScore = 0;
 let isProcessingMove = false; // Flag to track move processing
 
 // NEW CODE!!!!!!!!!!!!!!!!!!!!!!!!!
+
 // SELECTING THE BLOCK AREA:
 
 function updateImages1(clickedImageId) {
@@ -132,6 +133,26 @@ const addToMessage = function (message) {
 const displayPopUp = function (message) {
   document.querySelector('.pop-up-msg').innerHTML = message;
 };
+
+//USERNAME IMPORT
+// Wait for the Telegram Web App to be ready
+Telegram.WebApp.onEvent('ready', function () {
+  // Access the user's information
+  const user = Telegram.WebApp.initDataUnsafe.user;
+
+  if (user) {
+    const username = user.username || 'User';
+    // Display or use the username in your app
+    displayMessage(`${username},You are attacked by 🤖AI <br /><br />
+          Click on the first picture to choose the area you want to protect and
+          on the second picture to choose where you shoot.`);
+    document.getElementById('username').innerText = `${username}:`;
+  } else {
+    displayMessage(`${username},You are attacked by 🤖AI <br /><br />
+      Click on the first picture to choose the area you want to protect and
+      on the second picture to choose where you shoot.`);
+  }
+});
 
 //Recording gamer's hit and block + calls other functions
 function recordSelection() {
