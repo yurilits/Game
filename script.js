@@ -18,7 +18,6 @@ let highScore = 0;
 let isProcessingMove = false; // Flag to track move processing
 
 // NEW CODE!!!!!!!!!!!!!!!!!!!!!!!!!
-
 // SELECTING THE BLOCK AREA:
 
 function updateImages1(clickedImageId) {
