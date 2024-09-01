@@ -181,7 +181,7 @@ function fightRound() {
       `You shot your opponent in the ${selectedHit}, and it was not blocked! The opponent looses one 💛<br>`
     );
     computerHealth--;
-    document.querySelector('.opponent-health1').textContent = computerHealth;
+    updateHealthDisplay();
   }
   if (computerHit === selectedBlock) {
     addToMessage(
@@ -192,9 +192,19 @@ function fightRound() {
       `Your opponent shot you in the ${computerHit}, and you didn't block it! You loose one ❤️<br>`
     );
     playerHealth--;
-    document.querySelector('.your-health1').textContent = playerHealth;
+    updateHealthDisplay();
   }
   enfOfFight();
+}
+
+function updateHealthDisplay() {
+  // Update player's health display
+  let playerHearts = '❤️'.repeat(playerHealth);
+  document.querySelector('.your-health1').textContent = playerHearts;
+
+  // Update opponent's health display
+  let opponentHearts = '💛'.repeat(computerHealth);
+  document.querySelector('.opponent-health1').textContent = opponentHearts;
 }
 
 function enfOfFight() {
@@ -246,11 +256,6 @@ function newFight() {
   computerBlock = '';
   playerHealth = 3;
   computerHealth = 3;
-  document.querySelector('.your-health1').textContent = playerHealth;
-  document.querySelector('.opponent-health1').textContent = computerHealth;
-  document.querySelector('.number').textContent = `👊`;
-  document.querySelector('.message').innerHTML = `Fight your opponent👊👊👊`;
-  document.querySelector('body').style.backgroundColor = `#000000`;
-  document.querySelector('.number').style.width = `15rem`;
-  changeButton2();
+  updateHealthDisplay();
+  displayMessage(`You're fighting with a new AI robot`);
 }
