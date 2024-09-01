@@ -34,17 +34,17 @@ function updateImages1(clickedImageId) {
     newSources1.img11 = 'IMG/1-1a.jpg';
     newSources1.img12 = 'IMG/1-2.jpg';
     newSources1.img13 = 'IMG/1-3.jpg';
-    selectedBlock = 'head'; // Record the value 'head'
+    selectedBlock = 'HEAD'; // Record the value 'head'
   } else if (clickedImageId === 'img1-2') {
     newSources1.img11 = 'IMG/1-1.jpg';
     newSources1.img12 = 'IMG/1-2a.jpg';
     newSources1.img13 = 'IMG/1-3.jpg';
-    selectedBlock = 'body'; // Record the value 'body'
+    selectedBlock = 'BODY'; // Record the value 'body'
   } else if (clickedImageId === 'img1-3') {
     newSources1.img11 = 'IMG/1-1.jpg';
     newSources1.img12 = 'IMG/1-2.jpg';
     newSources1.img13 = 'IMG/1-3a.jpg';
-    selectedBlock = 'feet'; // Record the value 'feet'
+    selectedBlock = 'FEET'; // Record the value 'feet'
   }
 
   // Update all images with the new sources
@@ -84,17 +84,17 @@ function updateImages2(clickedImageId2) {
     newSources2.img21 = 'IMG/2-1a.jpg';
     newSources2.img22 = 'IMG/2-2.jpg';
     newSources2.img23 = 'IMG/2-3.jpg';
-    selectedHit = 'head'; // Record the value 'head'
+    selectedHit = 'HEAD'; // Record the value 'head'
   } else if (clickedImageId2 === 'img2-2') {
     newSources2.img21 = 'IMG/2-1.jpg';
     newSources2.img22 = 'IMG/2-2a.jpg';
     newSources2.img23 = 'IMG/2-3.jpg';
-    selectedHit = 'body'; // Record the value 'body'
+    selectedHit = 'BODY'; // Record the value 'body'
   } else if (clickedImageId2 === 'img2-3') {
     newSources2.img21 = 'IMG/2-1.jpg';
     newSources2.img22 = 'IMG/2-2.jpg';
     newSources2.img23 = 'IMG/2-3a.jpg';
-    selectedHit = 'feet'; // Record the value 'feet'
+    selectedHit = 'FEET'; // Record the value 'feet'
   }
 
   // Update all images with the new sources
@@ -155,7 +155,7 @@ function recordSelection() {
 }
 // Generate computer hit and block functions
 function getRandomHit() {
-  const RandomHits = ['head', 'body', 'feet'];
+  const RandomHits = ['HEAD', 'BODY', 'FEET'];
   const randomIndex = Math.floor(Math.random() * RandomHits.length);
   const computerHit = RandomHits[randomIndex];
   console.log('Computer Hit:', computerHit);
@@ -163,7 +163,7 @@ function getRandomHit() {
 }
 
 function getRandomBlock() {
-  const RandomBlocks = ['head', 'body', 'feet'];
+  const RandomBlocks = ['HEAD', 'BODY', 'FEET'];
   const randomIndex = Math.floor(Math.random() * RandomBlocks.length);
   const computerBlock = RandomBlocks[randomIndex];
   console.log('Computer Block:', computerBlock);
@@ -173,23 +173,19 @@ function getRandomBlock() {
 // Fight round function
 function fightRound() {
   if (selectedHit === computerBlock) {
-    displayMessage(
-      `You shot your opponent in the ${selectedHit}, but the shot was blocked by the energy shield.<br>`
-    );
+    displayMessage(`Your shot in the: ${selectedHit} is blocked.<br><br>`);
   } else {
     displayMessage(
-      `You shot your opponent in the ${selectedHit}, and it was not blocked! The opponent looses one 💛<br>`
+      `Your shot in the: ${selectedHit} is NOT blocked. Enemy looses 💛<br><br>`
     );
     computerHealth--;
     updateHealthDisplay();
   }
   if (computerHit === selectedBlock) {
-    addToMessage(
-      `Your opponent shot you in the ${computerHit}, but you blocked the shot with the energy shield.<br>`
-    );
+    addToMessage(`Enemies' shot in the: ${computerHit} is blocked.<br>`);
   } else {
     addToMessage(
-      `Your opponent shot you in the ${computerHit}, and you didn't block it! You loose one ❤️<br>`
+      `Enemies' shot in the: ${computerHit} is NOT blocked. You loose ❤️<br>`
     );
     playerHealth--;
     updateHealthDisplay();

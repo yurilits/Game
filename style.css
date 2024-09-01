@@ -47,23 +47,23 @@ main {
 /* Zone specific heights */
 
 .messagezone {
-  height: 25%; /* 25% of the screen height */
+  height: 15%; /* 25% of the screen height */
   background-color: #000000; /* Example background color */
-  font-size: 1rem;
+  font-size: 0.7rem;
   align-items: center;
 }
 
 .fightzone {
-  height: 50%; /* 50% of the screen height */
+  height: 70%; /* 50% of the screen height */
   background-color: #000000; /* Example background color */
-  font-size: 1rem;
+  font-size: 0.7rem;
   align-items: center;
 }
 
 .infozone {
-  height: 10%; /* 15% of the screen height */
+  height: 15%; /* 15% of the screen height */
   background-color: #000000; /* Example background color */
-  font-size: 1rem;
+  font-size: 0.7rem;
   align-items: center;
 }
 
