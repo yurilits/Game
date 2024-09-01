@@ -15,12 +15,14 @@ let playerHealth = 3;
 let computerHealth = 3;
 let winsInRaw = 0;
 let highScore = 0;
+let isProcessingMove = false; // Flag to track move processing
 
 // NEW CODE!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // SELECTING THE BLOCK AREA:
 
 function updateImages1(clickedImageId) {
+  if (isProcessingMove) return; // Prevent further actions during processing
   // Define the new sources based on the clicked image
   let newSources1 = {
     img11: 'IMG/1-1.jpg',
@@ -49,6 +51,11 @@ function updateImages1(clickedImageId) {
   document.getElementById('img1-1').src = newSources1.img11;
   document.getElementById('img1-2').src = newSources1.img12;
   document.getElementById('img1-3').src = newSources1.img13;
+
+  // Check if both hit and block are selected
+  if (selectedHit !== '0' && selectedBlock !== '0') {
+    recordSelection();
+  }
 }
 
 // Add click event listeners to each image
@@ -65,6 +72,7 @@ document
 // SELECTING THE SHOT AREA:
 
 function updateImages2(clickedImageId2) {
+  if (isProcessingMove) return; // Prevent further actions during processing
   // Define the new sources based on the clicked image
   let newSources2 = {
     img21: 'IMG/2-1.jpg',
@@ -93,6 +101,10 @@ function updateImages2(clickedImageId2) {
   document.getElementById('img2-1').src = newSources2.img21;
   document.getElementById('img2-2').src = newSources2.img22;
   document.getElementById('img2-3').src = newSources2.img23;
+  // Check if both hit and block are selected
+  if (selectedHit !== '0' && selectedBlock !== '0') {
+    recordSelection();
+  }
 }
 
 // Add click event listeners to each image
@@ -118,13 +130,15 @@ const addToMessage = function (message) {
   document.querySelector('.message').innerHTML += message;
 };
 
+const displayPopUp = function (message) {
+  document.querySelector('.pop-up-msg').innerHTML = message;
+};
+
 //Recording gamer's hit and block + calls other functions
 function recordSelection() {
-  if (selectedHit === '0' || selectedBlock === '0') {
-    displayMessage(
-      `You should select both areas to protect and zone to shoot<br>`
-    );
-  } else {
+  if (isProcessingMove) return; // Prevent multiple triggers
+  isProcessingMove = true; // Set flag to true to indicate processing
+  setTimeout(function () {
     computerHit = getRandomHit();
     computerBlock = getRandomBlock();
     fightRound();
@@ -136,7 +150,8 @@ function recordSelection() {
     document.getElementById('img2-1').src = 'IMG/2-1.jpg';
     document.getElementById('img2-2').src = 'IMG/2-2.jpg';
     document.getElementById('img2-3').src = 'IMG/2-3.jpg';
-  }
+    isProcessingMove = false; // Reset flag after processing
+  }, 1000); // 1000ms delay (1 second)
 }
 // Generate computer hit and block functions
 function getRandomHit() {
@@ -184,35 +199,24 @@ function fightRound() {
 
 function enfOfFight() {
   if (computerHealth == 0 && playerHealth !== 0) {
-    addToMessage(`<br>👑👑👑<br>Congratulations<br>👑👑👑<br>YOU WON!`);
-    document.querySelector('.number').textContent = `👍`;
+    popup.style.display = 'block';
+    displayPopUp(`Congratulations!<br>YOU WON!<br>👑👑👑`);
     winsInRaw++;
     document.querySelector('.score').textContent = winsInRaw;
-    changeButton1();
-    document.querySelector('body').style.backgroundColor = `#018801`;
-    document.querySelector('.number').style.width = `30rem`;
     if (winsInRaw > highScore) {
       highScore = winsInRaw;
     }
     document.querySelector('.highscore').textContent = highScore;
   }
   if (computerHealth !== 0 && playerHealth == 0) {
-    document.querySelector('.message').innerHTML += `<br>💔<br>YOU LOST<br>🤕`;
-    document.querySelector('.number').textContent = `👎`;
+    popup.style.display = 'block';
+    displayPopUp(`YOU LOST<br>🤕`);
     winsInRaw = 0;
     document.querySelector('.score').textContent = winsInRaw;
-    changeButton1();
-    document.querySelector('body').style.backgroundColor = `#990404`;
-    document.querySelector('.number').style.width = `30rem`;
   }
   if (computerHealth == 0 && playerHealth == 0) {
-    document.querySelector(
-      '.message'
-    ).innerHTML += `<br>🤝🤝🤝<br>IT IS A DRAW<br>🤝🤝🤝`;
-    document.querySelector('.number').textContent = `🤝`;
-    changeButton1();
-    document.querySelector('body').style.backgroundColor = `#695602`;
-    document.querySelector('.number').style.width = `30rem`;
+    popup.style.display = 'block';
+    displayPopUp(`NOBODY wins<br>💔`);
   }
 }
 
@@ -226,13 +230,14 @@ function changeButton1() {
   button.onclick = newFight;
 }
 
-function changeButton2() {
-  // Change the button text
-  const button = document.getElementById('Check-button');
-  button.textContent = 'Check!';
-  // Change the onclick action
-  button.onclick = recordSelection;
-}
+const popup = document.getElementById('popup');
+const popupBtn = document.getElementById('popupBtn');
+
+// Function to handle the pop-up button click
+popupBtn.addEventListener('click', function () {
+  popup.style.display = 'none'; // Close the pop-up after clicking the button
+  newFight();
+});
 
 function newFight() {
   selectedHit = '';
