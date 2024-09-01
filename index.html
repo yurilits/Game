@@ -3,9 +3,17 @@
   <head>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+
+              // Attempt to expand immediately
+              if (Telegram.WebApp && Telegram.WebApp.expand) {
+            Telegram.WebApp.expand();
+            window.Telegram.WebApp.expand()
+        }
+        // Fallback to the 'ready' event if the initial attempt fails
       Telegram.WebApp.onEvent('ready', function() {
           // Automatically expand the web app to full screen
           Telegram.WebApp.expand();
+          window.Telegram.WebApp.expand()
       });
   </script>
     <meta charset="UTF-8" />
