@@ -138,21 +138,19 @@ const displayPopUp = function (message) {
 // Wait for the Telegram Web App to be ready
 Telegram.WebApp.onEvent('ready', function () {
   // Access the user's information
-  const user = Telegram.WebApp.initDataUnsafe.user;
-
-  if (user) {
-    const username = user.username || 'User';
-    // Display or use the username in your app
-    displayMessage(`${username},You are attacked by 🤖AI <br /><br />
+  const user = window.Telegram.WebApp.initDataUnsafe.user;
+  const username = user.username || 'you';
+  // Display or use the username in your app
+  displayMessage(`🤖AI attacks ${username}  <br /><br />
           Click on the first picture to choose the area you want to protect and
           on the second picture to choose where you shoot.`);
-    document.getElementById('username').innerText = `${username}:`;
-  } else {
-    displayMessage(`${username},You are attacked by 🤖AI <br /><br />
-      Click on the first picture to choose the area you want to protect and
-      on the second picture to choose where you shoot.`);
-  }
 });
+const user = window.Telegram.WebApp.initDataUnsafe.user;
+const username = user.username || 'you';
+// Display or use the username in your app
+displayMessage(`🤖AI attacks ${username}  <br /><br />
+          Click on the first picture to choose the area you want to protect and
+          on the second picture to choose where you shoot.`);
 
 //Recording gamer's hit and block + calls other functions
 function recordSelection() {
